@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/bot.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Finance Bot Admin Dashboard - Comprehensive admin console for managing users, projects, payments, and analytics" />
+    <meta name="keywords" content="finance, bot, admin, dashboard, analytics, payments, subscriptions" />
+    <meta name="author" content="Finance Bot Team" />
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#030213" />
+    <meta name="theme-color" content="#0d0d0f" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Preconnect to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <title>Finance Bot Admin Dashboard</title>
+    
+    <!-- Prevent flash of unstyled content -->
+    <script>
+      // Dark mode initialization
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
+    
+    <style>
+      /* Loading screen styles */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease-out;
+      }
+      
+      .dark #loading-screen {
+        background: #0d0d0f;
+      }
+      
+      .loader {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #030213;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      .dark .loader {
+        border-color: #2a2a2c;
+        border-top-color: #8b5cf6;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        color: #717182;
+        font-size: 14px;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      
+      .dark .loading-text {
+        color: #a1a1a3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading screen -->
+    <div id="loading-screen">
+      <div style="text-align: center;">
+        <div class="loader"></div>
+        <div class="loading-text">Loading Finance Bot Dashboard...</div>
+      </div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Hide loading screen when page loads
+      window.addEventListener('load', () => {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          loadingScreen.style.opacity = '0';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+          }, 300);
+        }
+      });
+      
+      // Fallback to hide loading screen after 5 seconds
+      setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          loadingScreen.style.display = 'none';
+        }
+      }, 5000);
+    </script>
+  </body>
+</html>
